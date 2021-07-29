@@ -35,6 +35,13 @@ User.init(
         len: [4],
       },
     },
+    neighborhood_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'neighborhood',
+        key: 'id',
+      },
+    },
   },
   {
     hooks: {
