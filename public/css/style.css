@@ -1,0 +1,64 @@
+body{
+    background-image: url(https://thecavenderdiary.files.wordpress.com/2013/07/tool-shed-interior-all-cleaned-up.jpg);
+    height: 100%;
+    background-position: right 80% bottom 70%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.title{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow: hidden;
+/* background-color: #333; */
+border: 1px solid black;
+box-shadow: 2px 2px 2px black;
+border-radius: 5px;
+background: rgb(46, 45, 45);
+background: rgba(41, 41, 41, 0.4);
+}
+
+li {
+float: left;
+border-right:1px solid #bbb;
+}
+
+li:last-child {
+border-right: none;
+}
+
+li a {
+display: block;
+font-size: 20px;
+font-weight: bold;
+color: white;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+
+/* li a:hover:not(.active) {
+background-color: #111;
+} */
+
+.row{
+    border: 1px solid black;
+    width: 15vw;
+    background-color: #bbb;
+    border-radius: 5px;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(2,2,2,2);
+    transition: 0.3s;
+}
+
+.row:hover{
+    box-shadow: 0 8px 16px 0 rgba(2,2,2,2);
+}
