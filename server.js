@@ -26,7 +26,7 @@ let mailOptions = {
   from: 'toolin.around21@gmail.com', // TODO: email sender
   to: 'toolin.around21@gmail.com', // TODO: email receiver
   subject: 'Nodemailer - Test',
-  text: 'Wooohooo it works!!'
+  text: 'Wooohooo'
 };
 
 // Step 3

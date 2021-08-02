@@ -1,0 +1,9 @@
+<section class="container">
+  <h3 class="tool-name">{{tool.name}}</h3>
+  <section class="flex-row justify-center">
+    {{#each category.tools as |tool|}}
+    {{> tool-details}}
+    {{/each}}
+  </section>
+</section>
+
