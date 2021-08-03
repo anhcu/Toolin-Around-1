@@ -17,7 +17,7 @@
       <nav>
       <ul><a href="/">Home</a></ul>
       {{#if logged_in}}
-      <ul><a href="/logout">Logout</a></ul>
+      <ul><a id="logout" href="#">Logout</a></ul>
       <ul><a href="/toolbox">My toolbox</a></ul>
       {{else}}
       <ul><a href="/login">Login</a></ul>
@@ -36,9 +36,9 @@
   </div>
 
   <!-- Render script for logged in users only -->
-  {{#if logged_in}}
+  
   <script src="/js/logout.js"></script>
-  {{/if}}
+ 
 </body>
 
 </html>
