@@ -5,14 +5,7 @@ const { User, Category, Neighborhood, Tool } = require('../models');
 // GET all categories for homepage
 router.get('/', async (req, res) => {
   try {
-    const dbCategoryData = await Category.findAll({
-      include: [
-        {
-          model: Tool,
-          attributes: ['name'],
-        },
-      ],
-    });
+    const dbCategoryData = await Category.findAll({});
 
     const categories = dbCategoryData.map((category) =>
     category.get({ plain: true })
@@ -20,7 +13,7 @@ router.get('/', async (req, res) => {
 
     res.render('homepage', {
       categories,
-      loggedIn: req.session.loggedIn,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     console.log(err);
@@ -31,21 +24,39 @@ router.get('/', async (req, res) => {
 // GET one category
 router.get('/category/:id', withAuth, async (req, res) => {
   try {
-    const dbCategoryData = await Category.findByPk(req.params.id, {
+    const toolData = await Tool.findAll({
+      where: {
+        category_id: req.params.id,
+      },
       include: [
         {
-          model: Tool,
-          attributes: [
-            'id',
-            'name',
-            'description',
-          ],
+          model: User,
+          attributes: ['name'],
         },
       ],
     });
 
-    const category = dbCategoryData.get({ plain: true });
-    res.render('category', { category, loggedIn: req.session.loggedIn });
+    // const dbCategoryData = await Category.findByPk(req.params.id, {
+    //   include: [
+    //     {
+    //       model: Tool,
+    //       attributes: [
+    //         'id',
+    //         'name',
+    //         'description',
+    //       ],
+    //     },
+    //   ],
+    // });
+
+    // const tool = dbToolData.get({ plain: true });
+
+    // SERIALIZE ALL TOOL DATA
+    const tools = await toolData.map((tool) =>
+    tool.get({ plain: true })
+    );
+
+    res.render('category', { tools, logged_in: req.session.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
