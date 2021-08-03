@@ -34,22 +34,7 @@ router.get('/category/:id', withAuth, async (req, res) => {
           attributes: ['name'],
         },
       ],
-    });
-
-    // const dbCategoryData = await Category.findByPk(req.params.id, {
-    //   include: [
-    //     {
-    //       model: Tool,
-    //       attributes: [
-    //         'id',
-    //         'name',
-    //         'description',
-    //       ],
-    //     },
-    //   ],
-    // });
-
-    // const tool = dbToolData.get({ plain: true });
+    }); 
 
     // SERIALIZE ALL TOOL DATA
     const tools = await toolData.map((tool) =>
