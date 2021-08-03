@@ -79,20 +79,6 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-
-
-router.get('/', async (req, res) => {
-  res.render('homepage');
-});
-
-router.get('/pageone', async (req, res) => {
-  res.render('pageone');
-});
-
-router.get('/login', async (req, res) => {
-  res.render('login');
-});
-
 router.get('/toolbox', withAuth, async (req, res) => {
   try {
     // FIND ALL TOOLS FROM THE LOGGED IN USER

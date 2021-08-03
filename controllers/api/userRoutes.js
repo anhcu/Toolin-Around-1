@@ -3,6 +3,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// CREATE A NEW USER
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -10,6 +11,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
+      req.session.neighborhood_id = userData.neighborhood_id;
 
       res.status(200).json(userData);
     });
@@ -18,6 +20,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// LOGIN A USER
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
@@ -41,6 +44,7 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
+      req.session.neighborhood_id = userData.neighborhood_id;
       
       res.json({ user: userData, message: 'You are now logged in!' });
     });
