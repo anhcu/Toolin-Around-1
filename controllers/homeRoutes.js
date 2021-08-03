@@ -34,22 +34,7 @@ router.get('/category/:id', withAuth, async (req, res) => {
           attributes: ['name'],
         },
       ],
-    });
-
-    // const dbCategoryData = await Category.findByPk(req.params.id, {
-    //   include: [
-    //     {
-    //       model: Tool,
-    //       attributes: [
-    //         'id',
-    //         'name',
-    //         'description',
-    //       ],
-    //     },
-    //   ],
-    // });
-
-    // const tool = dbToolData.get({ plain: true });
+    }); 
 
     // SERIALIZE ALL TOOL DATA
     const tools = await toolData.map((tool) =>
@@ -65,13 +50,20 @@ router.get('/category/:id', withAuth, async (req, res) => {
 
 // GET one tool
 // Use the custom middleware before allowing the user to access the tool
-router.get('/tool/:id', withAuth, async (req, res) => {
+router.get('/tools/:id', withAuth, async (req, res) => {
   try {
-    const dbToolData = await Tool.findByPk(req.params.id);
+    const dbToolData = await Tool.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
 
-    const Tool = dbToolData.get({ plain: true });
+    const tool = dbToolData.get({ plain: true });
 
-    res.render('Tool', { Tool, loggedIn: req.session.loggedIn });
+    res.render('tool', { tool, logged_in: req.session.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -79,7 +71,7 @@ router.get('/tool/:id', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
+  if (req.session.logged_in) {
     res.redirect('/');
     return;
   }
