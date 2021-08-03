@@ -4,9 +4,13 @@
     {{!-- <h2>
         You are on the homepage of the template.
     </h2> --}}
-    {{#each categories as |category|}}
-    {{> category-details}}
-  {{/each}}
+    {{#if logged_in}}
+      {{#each categories as |category|}}
+      {{> category-details}}
+      {{/each}}
+    {{else}}
+    <p>BLURBY BLURB BLURB BLURB</p>
+    {{/if}}
   </div>
 </div>
 
