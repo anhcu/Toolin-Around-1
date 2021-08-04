@@ -92,6 +92,10 @@ router.get('/toolbox', withAuth, async (req, res) => {
           model: User,
           attributes: ['name'],
         },
+        {
+          model: Category,
+          attributes: ['name'],
+        },
       ],
     });
 
@@ -112,14 +116,32 @@ router.get('/toolbox', withAuth, async (req, res) => {
 router.get('/thetool', async(req, res)=>{
   try{
     const theData = await Tool.findAll();
-   const theInfo = theData.map((tool)=> tool.get({plain: true}));
- res.render('tool', {theData})
+    const theInfo = theData.map((tool)=> tool.get({plain: true}));
+  res.render('tool', {theData})
   res.json(theData)
   }
   catch(err){
     res.status(500).json(err)
   }
-})
+});
+
+router.get('/tools', withAuth, async (req, res) => {
+  try {
+    const toolData = await Tool.findAll({
+    });
+    
+    const tools = toolData.map((xxx) => xxx.get({ plain: true }));
+    //const categories = categoryData.get({ plain: true });
+
+    res.render('new-tool', { 
+      tools, 
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+});
 
 
 module.exports = router;
