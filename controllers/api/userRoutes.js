@@ -1,7 +1,7 @@
 // Has all of the logic to login or sign up
 
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Neighborhood } = require('../../models');
 
 // CREATE A NEW USER
 router.post('/', async (req, res) => {
@@ -23,7 +23,17 @@ router.post('/', async (req, res) => {
 // LOGIN A USER
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({
+      where: {
+        email: req.body.email
+      },
+      include: [
+        {
+          model: Neighborhood,
+          attributes: ['name'],
+        },
+      ],
+    });
 
     if (!userData) {
       res
@@ -45,6 +55,7 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
       req.session.neighborhood_id = userData.neighborhood_id;
+      req.session.neighborhood_name = userData.neighborhood.name;
       
       res.json({ user: userData, message: 'You are now logged in!' });
     });
