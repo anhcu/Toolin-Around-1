@@ -2,6 +2,24 @@ const router = require('express').Router();
 const { Tool } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+router.post('/', async (req, res) => {
+  try {
+      const newTool = await Tool.create({
+          name: req.body.name,
+          description: req.body.description,
+          user_id: req.session.user_id,
+          category_id: req.body.category
+      });
+
+      console.log(newTool)
+      
+  res.status(200).json(newTool);
+  } catch (err) {
+      res.status(400).json(err);
+  }
+});
+
+
 //delete route working 
 router.delete('/:id', withAuth, async (req, res) => {
 // alert("delete button was clicked");
