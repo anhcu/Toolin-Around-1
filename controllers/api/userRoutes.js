@@ -7,11 +7,23 @@ const { User, Neighborhood } = require('../../models');
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
+    const neighborhoodData = await User.findOne({
+      where: {
+        email: userData.email
+      },
+      include: [
+        {
+          model: Neighborhood,
+          attributes: ['name'],
+        },
+      ],
+    });
 
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
       req.session.neighborhood_id = userData.neighborhood_id;
+      req.session.neighborhood_name = neighborhoodData.neighborhood.name;
 
       res.status(200).json(userData);
     });
