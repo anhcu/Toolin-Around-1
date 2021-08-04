@@ -8,6 +8,19 @@
       </header>
       <div class="col s12"> 
         <p>{{tool.description}}</p>
+        <input type='hidden' name="tool-id" value="{{tool.id}}">
+        <div class="center">
+          <input name="tool-body" id="content" placeholder="Update Detail"/>
+          <button id="delete-tool" class="btn btn-primary"><a href="#"> DELETE</button>
+          <button id="update-tool" class="btn btn-primary"><a href="#">UPDATE</button>
+
+        </div>
       </div>
+     
+
+
+    
   </div>
 </section> 
+
+<script src="/js/profile.js"></script>

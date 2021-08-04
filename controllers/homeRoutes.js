@@ -109,7 +109,17 @@ router.get('/toolbox', withAuth, async (req, res) => {
   }
 });
 
-
+router.get('/thetool', async(req, res)=>{
+  try{
+    const theData = await Tool.findAll();
+   const theInfo = theData.map((tool)=> tool.get({plain: true}));
+ res.render('tool', {theData})
+  res.json(theData)
+  }
+  catch(err){
+    res.status(500).json(err)
+  }
+})
 
 
 module.exports = router;
