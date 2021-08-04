@@ -1,0 +1,18 @@
+<!-- RENDERING THE TOOL-DETAILS TEMPLATE FOR EACH OF THE USER'S TOOLS -->
+{{#each tools}}
+<section>
+  <div class="row">
+    <a href="/tools/{{id}}">
+      <header class="col s12">
+        <div class="row">
+          <h3 class="col s12 l7">{{name}} </h3>
+          <p class="col s12 l5">posted by {{user.name}}</p>
+        </div>
+      </header>
+      <div class="col s12"> 
+        <p>{{description}}</p>
+      </div>
+    </a>
+  </div>
+</section> 
+{{/each}}

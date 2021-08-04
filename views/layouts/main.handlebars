@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Template Website</title>
+  <!-- LINK TO MATERIALIZE CSS FRAMEWORK -->
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+  <!-- LINK TO MATERIALIZE ICONS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- LINK TO CSS STYLESHEET -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -19,6 +24,14 @@
       {{#if logged_in}}
       <ul><a id="logout" href="#">Logout</a></ul>
       <ul><a href="/toolbox">My toolbox</a></ul>
+      <ul><a href="#">{{neighborhood_name}}</a></ul>
+      <ul>
+        <form id="search-form">
+          <i class="red-text material-icons prefix">search</i>
+          <input type="text" placeholder="search" id="search">
+          <button type="submit" id="search-submit">Submit</button> 
+        </form>
+      </ul>
       {{else}}
       <ul><a href="/login">Login</a></ul>
       {{/if}}
@@ -38,6 +51,7 @@
   <!-- Render script for logged in users only -->
   
   <script src="/js/logout.js"></script>
+  <script src="/js/search.js"></script>
  
 </body>
 

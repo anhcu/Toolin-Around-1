@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Tool } = require('../../models');
+const { Tool, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', async (req, res) => {
