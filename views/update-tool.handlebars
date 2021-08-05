@@ -1,5 +1,18 @@
-
-
 <div>
-    Hello!
+    <h2>Update Tool</h2>
+    <form class="update-tool">
+        <div>
+            <label for="name">Tool Name:</label>
+            <input type="text" id="name" value="{{tool.name}}"></input>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <input type="text" id="description" value="{{tool.description}}"></input>
+        </div>
+        <div>
+            <button type="submit">Update Tool</button>
+        </div>
+    </form>
 </div>
+
+<script src="/js/updateTool.js"></script>

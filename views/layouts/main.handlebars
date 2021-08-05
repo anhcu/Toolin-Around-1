@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Template Website</title>
+  <title>Toolin' Around</title>
   <!-- LINK TO MATERIALIZE CSS FRAMEWORK -->
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
   <!-- LINK TO MATERIALIZE ICONS -->
@@ -17,7 +17,7 @@
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
       <h1>
-        <a href="/">Template Website</a>
+        <a href="/">Toolin' Around</a>
       </h1>
       <nav>
       <ul><a href="/">Home</a></ul>
@@ -49,10 +49,10 @@
   </div>
 
   <!-- Render script for logged in users only -->
-  
+  {{#if logged_in}}
   <script src="/js/logout.js"></script>
   <script src="/js/search.js"></script>
- 
+ {{/if}}
 </body>
 
 </html>
