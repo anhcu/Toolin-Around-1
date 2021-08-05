@@ -47,7 +47,11 @@ router.get('/category/:id', withAuth, async (req, res) => {
     );
     console.log(tools)
 
-    res.render('category', { tools, logged_in: req.session.logged_in });
+    res.render('category', { 
+      tools, 
+      logged_in: req.session.logged_in,
+      neighborhood_name: req.session.neighborhood_name
+     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -69,7 +73,11 @@ router.get('/tools/:id', withAuth, async (req, res) => {
 
     const tool = dbToolData.get({ plain: true });
 
-    res.render('tool', { tool, logged_in: req.session.logged_in });
+    res.render('tool', { 
+      tool, 
+      logged_in: req.session.logged_in,
+      neighborhood_name: req.session.neighborhood_name
+     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -156,6 +164,8 @@ router.get('/tools', withAuth, async (req, res) => {
     res.render('new-tool', { 
       tools, 
       logged_in: req.session.logged_in,
+      neighborhood_name: req.session.neighborhood_name
+    
     });
   } catch (err) {
     res.status(500).json(err);
