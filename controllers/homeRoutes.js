@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
     const categories = dbCategoryData.map((category) =>
     category.get({ plain: true })
     );
-    console.log(req.session.neighborhood_name)
+    console.log(req.session)
     res.render('homepage', {
       categories,
       logged_in: req.session.logged_in,
@@ -77,12 +77,25 @@ router.get('/tools/:id', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/');
-    return;
-  }
-
   res.render('login');
+});
+
+router.get('/update-tool/:id', async (req, res) => {
+  const toolData = await Tool.findByPk(req.params.id, {
+    include: [
+      {
+        model: User,
+        attributes: ['name'],
+      },
+    ],
+  });
+  const tool = toolData.get ({ plain: true});
+  
+  res.render('update-tool', {
+    tool,
+    logged_in: req.session.logged_in,
+    neighborhood_name: req.session.neighborhood_name,
+  });
 });
 
 router.get('/toolbox', withAuth, async (req, res) => {
@@ -120,17 +133,17 @@ router.get('/toolbox', withAuth, async (req, res) => {
   }
 });
 
-router.get('/thetool', async(req, res)=>{
-  try{
-    const theData = await Tool.findAll();
-    const theInfo = theData.map((tool)=> tool.get({plain: true}));
-  res.render('tool', {theData})
-  res.json(theData)
-  }
-  catch(err){
-    res.status(500).json(err)
-  }
-});
+// router.get('/thetool', async(req, res)=>{
+//   try{
+//     const theData = await Tool.findAll();
+//     const theInfo = theData.map((tool)=> tool.get({plain: true}));
+//   res.render('tool', {theData})
+//   res.json(theData)
+//   }
+//   catch(err){
+//     res.status(500).json(err)
+//   }
+// });
 
 router.get('/tools', withAuth, async (req, res) => {
   try {
