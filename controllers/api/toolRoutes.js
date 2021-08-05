@@ -45,7 +45,7 @@ router.delete('/:id', withAuth, async (req, res) => {
 // update route  
 router.put('/:id', withAuth, async (req, res) => {
   try {
-    const [toolData] = await Tool.update(req.body, {
+    const toolData = await Tool.update(req.body, {
       where: {
         id: req.params.id,
       },

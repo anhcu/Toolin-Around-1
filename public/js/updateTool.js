@@ -23,4 +23,4 @@ const updateToolHandler = async (event) => {
 };
 
 document
-.querySelector('#update-tool').addEventListener('submit', updateToolHandler);
+.querySelector('#update-tool').addEventListener('click', updateToolHandler);
