@@ -66,7 +66,7 @@ router.get('/tools/:id', withAuth, async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['name', 'id'],
         },
       ],
     });
@@ -176,9 +176,9 @@ router.get('/tools', withAuth, async (req, res) => {
 // GET SEARCHED TOOLS
 router.get('/:search', withAuth, async (req, res) => {
   try {
-    console.log(req.body.search)
+    
     const search = req.params.search;
-    console.log(search)
+    
     const toolData = await Tool.findAll({
       where: {
   
@@ -200,9 +200,50 @@ router.get('/:search', withAuth, async (req, res) => {
         {
           model: User,
           attributes: ['name', 'neighborhood_id'],
-          // where: {
-          //   neighborhood_id: req.session.neighborhood_id,
-          // }
+          include: [
+            {
+              model: Neighborhood,
+              attributes: ['name'],
+            },
+          ],
+        },
+      ],
+      order: [
+        [User, Neighborhood, 'name', 'ASC'],
+      ],
+    }); 
+
+    // SERIALIZE ALL TOOL DATA
+    const tools = await toolData.map((tool) =>
+    tool.get({ plain: true })
+    );
+
+    res.render('searchedtools', { 
+      tools, 
+      logged_in: req.session.logged_in, 
+      neighborhood_name: req.session.neighborhood_name
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET ONE USER'S TOOLS BY ID
+router.get('/user/:id', withAuth, async (req, res) => {
+  try {
+    const toolData = await Tool.findAll({
+      where: {
+        user_id: req.params.id,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['name', 'neighborhood_id'],
+        },
+        {
+          model: Category,
+          attributes: ['name'],
         },
       ],
     }); 
@@ -213,11 +254,11 @@ router.get('/:search', withAuth, async (req, res) => {
     );
     console.log(tools)
 
-    res.render('searchedtools', { 
+    res.render('user', { 
       tools, 
-      logged_in: req.session.logged_in, 
+      logged_in: req.session.logged_in,
       neighborhood_name: req.session.neighborhood_name
-    });
+     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
