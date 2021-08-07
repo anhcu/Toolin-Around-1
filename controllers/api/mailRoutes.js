@@ -1,7 +1,23 @@
 const router = require('express').Router();
 const nodemailer = require('nodemailer');
+const { User, Tool } = require('../../models');
 
-router.post('/', (req, res) => {
+router.post('/:id', async (req, res) => {
+
+    console.log(req.params.id)
+    const dbToolData = await Tool.findByPk(req.params.id, {
+        include: [
+          {
+            model: User,
+            attributes: ['name', 'email'],
+          },
+        ],
+      });
+  
+      const tool = dbToolData.get({ plain: true });
+      console.log(tool.user.email)
+
+
 // Step 1
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -16,7 +32,7 @@ router.post('/', (req, res) => {
         from: 'toolin.around21@gmail.com', // TODO: email sender
         to: 'toolin.around21@gmail.com', // TODO: email receiver
         subject: 'Nodemailer - Test',
-        text: 'Wooohooo'
+        text: `Hey, ${tool.user.name}! ${req.session.user_name} has requested to borrow your ${tool.name}. testing that this is your email address: ${tool.user.email} and this is the logged in user's email address ${req.session.user_email} `
     };
 
     // Step 3
