@@ -15,11 +15,17 @@
           <form class="delete-tool" id="delete-tool-form">
             <button class="btn btn-primary" type="submit"><i class="material-icons" data-id="{{id}}">delete</i></button>
           </form>
-          <button class="btn btn-primary"><a href="/update-tool/{{tool.id}}" class="white-text"><i class="material-icons">edit</i></button>
+          <a href="/update-tool/{{tool.id}}" class="white-text btn btn-primary"><i class="material-icons">edit</i></a>
         </div>
+        {{else}}
+          <button id="borrow" class="btn btn-primary">borrow tool</button>
         {{/if}}
       </div>
   </div>
 </section> 
 
+{{#if user_tool}}
 <script src="/js/deleteTool.js"></script>
+{{else}}
+<script src="/js/borrowTool.js"></script>
+{{/if}}
