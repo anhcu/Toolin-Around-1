@@ -52,3 +52,7 @@ document
 document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormHandler);
+
+$(document).ready(function(){
+  $('select').formSelect();
+});

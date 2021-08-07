@@ -3,6 +3,7 @@ const updateToolHandler = async (event) => {
 
     const name = document.querySelector('#name').value.trim();
     const description = document.querySelector('#description').value.trim();
+    const category_id = document.querySelector('#category').value.trim();
     const tool_id = parseInt(document.location.href.split("/").pop());
 
     if (name && description) {
@@ -24,3 +25,7 @@ const updateToolHandler = async (event) => {
 
 document
 .querySelector('#update-tool').addEventListener('click', updateToolHandler);
+
+$(document).ready(function(){
+    $('select').formSelect();
+});

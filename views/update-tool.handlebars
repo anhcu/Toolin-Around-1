@@ -9,10 +9,26 @@
             <label for="description">Description:</label>
             <input type="text" id="description" value="{{tool.description}}"></input>
         </div>
+        <div class="input-field form-group">
+            <select id="category">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Automotive</option>
+                <option value="2">Hand Tools</option>
+                <option value="3">Power Tools</option>
+                <option value="4">Welding</option>
+                <option value="5">Safety</option>
+                <option value="6">Shop Vacuums</option>
+                <option value="7">Workwear</option>
+                <option value="8">Outdoor Power</option>
+                <option value="9">Lawn & Garden</option>
+            </select>
+            <label>Choose a Category:</label>
+        </div>
         <div>
-            <button type="submit" id="update-tool">Update Tool</button>
+            <button type="submit" id="update-tool" class="btn btn-primary">Update Tool</button>
         </div>
     </form>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/updateTool.js"></script>

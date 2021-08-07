@@ -3,26 +3,22 @@
       <header class="col s12">
         <div class="row">
           <h3 class="col s12 l7">{{tool.name}} </h3>
-          <p class="col s12 l5">posted by <a href="/user/{{tool.user.id}}">{{tool.user.name}}</a></p>
+          <p class="col s12 l5 tool-owner">posted by <a href="/user/{{tool.user.id}}">{{tool.user.name}}</a></p>
+          <p class="col s12 l5">{{tool.category.name}}</a></p>
         </div>
       </header>
       <div class="col s12"> 
         <p>{{tool.description}}</p>
         <input type='hidden' name="tool-id" value="{{tool.id}}">
-        
-
-        <div class="center">
-          <form class="delete-tool">
-            <button class="btn btn-primary" type="submit">DELETE</button>
+        {{#if user_tool}}
+        <div class="right" id="delete-edit-div">
+          <form class="delete-tool" id="delete-tool-form">
+            <button class="btn btn-primary" type="submit"><i class="material-icons" data-id="{{id}}">delete</i></button>
           </form>
-          <button class="btn btn-primary"><a href="/update-tool/{{tool.id}}">UPDATE</button>
-
+          <button class="btn btn-primary"><a href="/update-tool/{{tool.id}}" class="white-text"><i class="material-icons">edit</i></button>
         </div>
+        {{/if}}
       </div>
-     
-
-
-    
   </div>
 </section> 
 
