@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
       categories,
       logged_in: req.session.logged_in,
       neighborhood_name: req.session.neighborhood_name,
+      user_name: req.session.user_name,
     });
   } catch (err) {
     console.log(err);
