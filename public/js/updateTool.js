@@ -5,12 +5,13 @@ const updateToolHandler = async (event) => {
     const description = document.querySelector('#description').value.trim();
     const category_id = document.querySelector('#category').value.trim();
     const tool_id = parseInt(document.location.href.split("/").pop());
+    console.log(category_id)
 
-    if (name && description) {
+    if (name && description && category_id) {
 
     const res = await fetch(`/api/tools/${tool_id}`, {
         method: 'PUT',
-        body: JSON.stringify({ name, description }),
+        body: JSON.stringify({ name, description, category_id }),
         headers: { 'Content-Type': 'application/json' },
     });
 
