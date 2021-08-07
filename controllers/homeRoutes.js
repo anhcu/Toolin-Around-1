@@ -38,17 +38,20 @@ router.get('/category/:id', withAuth, async (req, res) => {
           //   neighborhood_id: req.session.neighborhood_id,
           // }
         },
+        {
+          model: Category,
+          attributes: ['name'],
+        },
       ],
     }); 
 
     // SERIALIZE ALL TOOL DATA
     const tools = await toolData.map((tool) =>
     tool.get({ plain: true })
-    );
-    console.log(tools)
+    );  
 
     res.render('category', { 
-      tools, 
+      tools,
       logged_in: req.session.logged_in,
       neighborhood_name: req.session.neighborhood_name
      });
@@ -68,13 +71,26 @@ router.get('/tools/:id', withAuth, async (req, res) => {
           model: User,
           attributes: ['name', 'id'],
         },
+        {
+          model: Category,
+          attributes: ['name'],
+        },
       ],
     });
 
     const tool = dbToolData.get({ plain: true });
 
+    // CHECK IF THE TOOL IS THE LOGGED IN USER'S TOOL
+    if(tool.user_id === req.session.user_id) {
+      // CREATE NEW SESSION PARAMETER TO FLAG FOR USER'S TOOL IN HANDLEBARS
+      req.session.user_tool = true;
+    } else {
+      req.session.user_tool = false;
+    }
+
     res.render('tool', { 
-      tool, 
+      tool,
+      user_tool: req.session.user_tool, 
       logged_in: req.session.logged_in,
       neighborhood_name: req.session.neighborhood_name
      });
@@ -211,7 +227,15 @@ router.get('/:search', withAuth, async (req, res) => {
       order: [
         [User, Neighborhood, 'name', 'ASC'],
       ],
-    }); 
+    });
+    
+    // CHECK IF THERE ARE ANY SEARCH RESULTS
+    if(!toolData.length) {
+      // CREATE NEW SESSION PARAMETER TO FLAG FOR NO SEARCH RESULTS
+      req.session.no_results = true;
+    } else {
+      req.session.no_results = false;
+    }
 
     // SERIALIZE ALL TOOL DATA
     const tools = await toolData.map((tool) =>
@@ -221,7 +245,9 @@ router.get('/:search', withAuth, async (req, res) => {
     res.render('searchedtools', { 
       tools, 
       logged_in: req.session.logged_in, 
-      neighborhood_name: req.session.neighborhood_name
+      neighborhood_name: req.session.neighborhood_name,
+      no_results: req.session.no_results,
+      search
     });
   } catch (err) {
     console.log(err);

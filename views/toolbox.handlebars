@@ -1,17 +1,8 @@
-<!-- Loop over each object in the projects array -->
-<!--<div class="row mb-4 project">
-  <div class="col-md-5">
-    <h2>
-        You have reached your {{{user.name}}}'s profile.
-    </h2>
-  </div>
-</div>-->
-
 <!-- RENDERING THE TOOL-DETAILS TEMPLATE FOR EACH OF THE USER'S TOOLS -->
 {{#each tools as |tool|}}
 {{> tool-details}}
 {{/each}}
 <!-- BUTTON TO REDIRECT TO CREATING A NEW TOOL -->
 <div class="center">
-    <button id="add-tool" class="btn btn-primary"><a href="/tools" id="new-tool">Add Tool</a></button>
+    <button id="add-tool" class="btn btn-primary"><a href="/tools" class="white-text" id="new-tool">Add Tool</a></button>
 </div>

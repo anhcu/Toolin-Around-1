@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Toolin' Around</title>
   <!-- LINK TO MATERIALIZE CSS FRAMEWORK -->
-  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!-- LINK TO MATERIALIZE ICONS -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- LINK TO CSS STYLESHEET -->
@@ -14,45 +14,62 @@
 </head>
 
 <body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <a href="/">Toolin' Around</a>
-      </h1>
-      <nav>
-      <ul><a href="/">Home</a></ul>
-      {{#if logged_in}}
-      <ul><a id="logout" href="#">Logout</a></ul>
-      <ul><a href="/toolbox">My toolbox</a></ul>
-      <ul><a href="#">{{neighborhood_name}}</a></ul>
-      <ul>
-        <form id="search-form">
-          <i class="red-text material-icons prefix">search</i>
-          <input type="text" placeholder="search" id="search">
-          <button type="submit" id="search-submit">Submit</button> 
-        </form>
+  <!-- NAV BAR -->
+  <nav class="nav-extended">
+    <div class="nav-wrapper">
+      <ul class="right col sm12 m8 l6">
+        <!-- HOME  BUTTON -->
+        <li><a href="/"><i class="material-icons left" id="home">home</i>Home</a></li>
+        {{#if logged_in}}
+        <!-- USER DASHBOARD BUTTON -->
+        <li><a href="/toolbox"><i class="material-icons left" id="dashboard">build</i>My toolbox</a></li>
+        <!-- USER'S NEIGHBORHOOD -->
+        <li><a href="#"><i class="material-icons left" id="dashboard">location_on</i>{{neighborhood_name}}</a></li>
+        <!-- LOGOUT BUTTON -->
+        <li><a id="logout" href="#"><i class="material-icons left" id="logout">lock_outline</i>Logout</a></li>
+        {{else}}
+        <!-- LOGIN BUTTON -->
+        <li><a href="/login"><i class="material-icons left" id="login">vpn_key</i>Login</a></li>
+        {{/if}}
       </ul>
-      {{else}}
-      <ul><a href="/login">Login</a></ul>
+      {{#if logged_in}}
+      <br class="hide-on-large-only">
+      <!-- SEARCH BAR -->
+      <form id="search-form" class="row">
+        <label class="col s1" id="search-label" for="search"><i class="material-icons left">search</i></label>
+        <input class="col s6 m3" type="text" placeholder="search" id="search" name="search">
+        <button type="submit" id="search-submit">Submit</button> 
+      </form>
       {{/if}}
-      
+    </div>
+    <!-- PAGE TITLE -->
+    <div class="nav-content center">
+      <span class="nav-title"><a href="/">Toolin' Around</a></span>
+    </div>
+  </nav>
 
-      </nav>
-    </header>
-      <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
-  </div>
+  <!-- PAGE CONTENTS -->
+  <main>
+    <div class="container">
+      <!-- RENDER HANDLEBAR TEMPLATES -->
+    {{{ body }}}
+    </div>
+  </main>
 
-  <!-- Render script for logged in users only -->
+  <!-- PAGE FOOTER -->
+  <footer>
+    <div class="container center-align my-footer">
+    © 2021 Team Toolin' Around
+    </div>
+  </footer>
+
+  <!-- RENDER SCRIPT FOR LOGGED IN USERS ONLY -->
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   <script src="/js/search.js"></script>
- {{/if}}
-</body>
+  {{/if}}
 
+  <!-- LINK TO MATERIALIZE JAVASCRIPT -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
 </html>
