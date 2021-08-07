@@ -4,7 +4,9 @@ const borrowBtn = document.querySelector('#borrow');
 const mailTest = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('/api/borrow', {
+    const tool_id = parseInt(document.location.href.split("/").pop());
+
+    const response = await fetch(`/api/borrow/${tool_id}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
