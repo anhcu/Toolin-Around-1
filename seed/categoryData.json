@@ -1,29 +1,38 @@
 [
   {
-    "name": "Automotive"
+    "name": "Automotive",
+    "class": "fas fa-car-side"
   },
   {
-    "name": "Hand Tools"
+    "name": "Hand Tools",
+    "class": "fas fa-hammer"
   },
   {
-    "name": "Power Tools"
+    "name": "Power Tools",
+    "class": "fas fa-power-off"
   },
   {
-    "name": "Welding"
+    "name": "Welding",
+    "class": "fas fa-fire"
   },
   {
-    "name": "Safety"
+    "name": "Safety",
+    "class": "fas fa-hard-hat"
   },
   {
-    "name": "Shop Vacuums"
+    "name": "Shop Vacuums",
+    "class": "fas fa-broom"
   },
   {
-    "name": "Workwear"
+    "name": "Workwear",
+    "class": "fas fa-vest"
   },
   {
-    "name": "Outdoor Power"
+    "name": "Outdoor Power",
+    "class": "fas fa-plug"
   },
   {
-    "name": "Lawn & Garden"
+    "name": "Lawn & Garden",
+    "class": "fas fa-sun"
   }
 ]
