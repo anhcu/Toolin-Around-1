@@ -1,3 +1,6 @@
+// Creates Category model.
+// Includes id, name, and class
+
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 

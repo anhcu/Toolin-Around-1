@@ -2,23 +2,23 @@ const router = require('express').Router();
 const nodemailer = require('nodemailer');
 const { User, Tool } = require('../../models');
 
+// Route to send out email after "Request to Borow is clicked"
+// This is the functionality for nodemailer
 router.post('/:id', async (req, res) => {
 
-    console.log(req.params.id)
+    // Find tool by pk and inslude user names and emails
     const dbToolData = await Tool.findByPk(req.params.id, {
         include: [
-          {
+            {
             model: User,
             attributes: ['name', 'email'],
-          },
+            },
         ],
-      });
-  
-      const tool = dbToolData.get({ plain: true });
-      console.log(tool.user.email)
+    });
 
+    const tool = dbToolData.get({ plain: true });
 
-// Step 1
+    // Step 1
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -46,7 +46,6 @@ router.post('/:id', async (req, res) => {
         
     });
 })
-
 
 module.exports = router;
 

@@ -1,3 +1,6 @@
+// Creates User model.
+// Includes id, name, email, password, and neighborhood_id
+
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');

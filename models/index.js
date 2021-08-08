@@ -1,3 +1,5 @@
+// Sets up model associations
+
 const User = require('./User');
 const Category = require('./Category');
 const Neighborhood = require('./Neighborhood');

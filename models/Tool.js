@@ -1,3 +1,6 @@
+// Creates Tool model.
+// Includes id, name, descripton, user_id, and category_id
+
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
