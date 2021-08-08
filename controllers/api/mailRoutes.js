@@ -29,10 +29,18 @@ router.post('/:id', async (req, res) => {
 
     // Step 2
     let mailOptions = {
-        from: 'toolin.around21@gmail.com', // TODO: email sender
-        to: 'toolin.around21@gmail.com', // TODO: email receiver
-        subject: 'Nodemailer - Test',
-        text: `Hey, ${tool.user.name}! ${req.session.user_name} has requested to borrow your ${tool.name}. testing that this is your email address: ${tool.user.email} and this is the logged in user's email address ${req.session.user_email} `
+        from: 'toolin.around21@gmail.com', // TODO: email sender, req.session.user_email
+        to: 'toolin.around21@gmail.com', // TODO: email receiver, tool.user.email
+        subject: 'Tool Requested',
+        text: 'A neighbor has requested one of your tools.',
+        html: `
+            <p>Hey, ${tool.user.name}! The user below has requested to borrow one of your tools. Please contact them directly to arrange for pick up.</p>
+            <ul>
+                <li>Name: ${req.session.user_name}</li>
+                <li>Email: ${req.session.user_email}</li>
+                <li>Tool Requested:${tool.name}</li>
+            </ul>
+        `
     };
 
     // Step 3
