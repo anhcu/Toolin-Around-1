@@ -1,3 +1,6 @@
+// Creates Neighborhood model.
+// Includes id and name
+
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 

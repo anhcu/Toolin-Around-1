@@ -1,3 +1,5 @@
+// Contains all of the get routing logic to pull information from the database
+
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
 const { User, Category, Neighborhood, Tool } = require('../models');
@@ -8,6 +10,7 @@ router.get('/', async (req, res) => {
   try {
     const dbCategoryData = await Category.findAll({});
 
+        // Serialize all category data
     const categories = dbCategoryData.map((category) =>
     category.get({ plain: true })
     );
@@ -46,7 +49,7 @@ router.get('/category/:id', withAuth, async (req, res) => {
       ],
     }); 
 
-    // SERIALIZE ALL TOOL DATA
+    // Serialize all tool data
     const tools = await toolData.map((tool) =>
     tool.get({ plain: true })
     );  
@@ -55,7 +58,7 @@ router.get('/category/:id', withAuth, async (req, res) => {
       tools,
       logged_in: req.session.logged_in,
       neighborhood_name: req.session.neighborhood_name
-     });
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -81,9 +84,9 @@ router.get('/tools/:id', withAuth, async (req, res) => {
 
     const tool = dbToolData.get({ plain: true });
 
-    // CHECK IF THE TOOL IS THE LOGGED IN USER'S TOOL
+    // Checks if the tool is the current logged in user's tool
     if(tool.user_id === req.session.user_id) {
-      // CREATE NEW SESSION PARAMETER TO FLAG FOR USER'S TOOL IN HANDLEBARS
+      // Creates a new session parameter to flag for user's tool in handlebars
       req.session.user_tool = true;
     } else {
       req.session.user_tool = false;
@@ -94,17 +97,19 @@ router.get('/tools/:id', withAuth, async (req, res) => {
       user_tool: req.session.user_tool, 
       logged_in: req.session.logged_in,
       neighborhood_name: req.session.neighborhood_name
-     });
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
+// GET the login page
 router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// GET the update tool page
 router.get('/update-tool/:id', async (req, res) => {
   const toolData = await Tool.findByPk(req.params.id, {
     include: [
@@ -116,6 +121,7 @@ router.get('/update-tool/:id', async (req, res) => {
   });
   const tool = toolData.get ({ plain: true});
   
+  // Render the update tool page and give access to tool, logged_in, and neighborhood_name
   res.render('update-tool', {
     tool,
     logged_in: req.session.logged_in,
@@ -123,10 +129,11 @@ router.get('/update-tool/:id', async (req, res) => {
   });
 });
 
+// GET the toolbox page
 router.get('/toolbox', withAuth, async (req, res) => {
   try {
-    // FIND ALL TOOLS FROM THE LOGGED IN USER
-    // AND INCLUDE USER'S NAME FROM ASSOCIATION OF USER MODEL TO POST MODEL
+    // Find all tools from the logged in user
+    // And include user's name from association of user model to post model
     const toolData = await Tool.findAll({
       where: {
         user_id: req.session.user_id,
@@ -143,10 +150,10 @@ router.get('/toolbox', withAuth, async (req, res) => {
       ],
     });
 
-    // SERIALIZE TOOL DATA SO TEMPLATE CAN READ IT
+    // Serialize all tool data
     const tools = toolData.map((tool) => tool.get({ plain: true }));
 
-    // RENDER THE USER'S DASHBOARD WITH TOOLS & SESSION PARAMETERS FOR TEMPLATE
+    // Render the user's dashboard with tools and session parameters for template
     res.render('toolbox', { 
       tools, 
       logged_in: req.session.logged_in,
@@ -158,25 +165,13 @@ router.get('/toolbox', withAuth, async (req, res) => {
   }
 });
 
-// router.get('/thetool', async(req, res)=>{
-//   try{
-//     const theData = await Tool.findAll();
-//     const theInfo = theData.map((tool)=> tool.get({plain: true}));
-//   res.render('tool', {theData})
-//   res.json(theData)
-//   }
-//   catch(err){
-//     res.status(500).json(err)
-//   }
-// });
-
+// GET the create a new tool page
 router.get('/tools', withAuth, async (req, res) => {
   try {
-    const toolData = await Tool.findAll({
-    });
-    
+    const toolData = await Tool.findAll({});
+
+    // Serialize all tool data
     const tools = toolData.map((xxx) => xxx.get({ plain: true }));
-    //const categories = categoryData.get({ plain: true });
 
     res.render('new-tool', { 
       tools, 
@@ -187,18 +182,15 @@ router.get('/tools', withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-
 });
 
-// GET SEARCHED TOOLS
+// Get searched tools
 router.get('/:search', withAuth, async (req, res) => {
   try {
-    
     const search = req.params.search;
     
     const toolData = await Tool.findAll({
       where: {
-  
           [Op.or]: [
           {
             name: {
@@ -211,7 +203,6 @@ router.get('/:search', withAuth, async (req, res) => {
             }
           },
         ],
-  
       },
       include: [
         {
@@ -229,16 +220,16 @@ router.get('/:search', withAuth, async (req, res) => {
         [User, Neighborhood, 'name', 'ASC'],
       ],
     });
-    
-    // CHECK IF THERE ARE ANY SEARCH RESULTS
+
+    // Check if there are andny search results
     if(!toolData.length) {
-      // CREATE NEW SESSION PARAMETER TO FLAG FOR NO SEARCH RESULTS
+      // Create new session parameter to flag for no search results
       req.session.no_results = true;
     } else {
       req.session.no_results = false;
     }
 
-    // SERIALIZE ALL TOOL DATA
+    // Serialize all tool data
     const tools = await toolData.map((tool) =>
     tool.get({ plain: true })
     );
@@ -256,7 +247,7 @@ router.get('/:search', withAuth, async (req, res) => {
   }
 });
 
-// GET ONE USER'S TOOLS BY ID
+// Get one user's tools by id
 router.get('/user/:id', withAuth, async (req, res) => {
   try {
     const toolData = await Tool.findAll({
@@ -275,7 +266,7 @@ router.get('/user/:id', withAuth, async (req, res) => {
       ],
     }); 
 
-    // SERIALIZE ALL TOOL DATA
+    // Serialize all tool data
     const tools = await toolData.map((tool) =>
     tool.get({ plain: true })
     );
@@ -291,6 +282,5 @@ router.get('/user/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 module.exports = router;

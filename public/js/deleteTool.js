@@ -15,10 +15,9 @@ const deleteToolHandler = async (event) => {
     if (res.ok) {
         document.location.replace('/toolbox');
 
-
     } else {
         alert(res.statusText);
     }
 };
 
-    document.querySelector('.delete-tool').addEventListener('submit', deleteToolHandler);
+document.querySelector('.delete-tool').addEventListener('submit', deleteToolHandler);

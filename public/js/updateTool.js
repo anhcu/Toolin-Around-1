@@ -1,11 +1,13 @@
+// Logic to update a tool
+
 const updateToolHandler = async (event) => {
     event.preventDefault();
 
+    // Gets values from form
     const name = document.querySelector('#name').value.trim();
     const description = document.querySelector('#description').value.trim();
     const category_id = document.querySelector('#category').value.trim();
     const tool_id = parseInt(document.location.href.split("/").pop());
-    console.log(category_id)
 
     if (name && description && category_id) {
 

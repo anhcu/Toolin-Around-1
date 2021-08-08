@@ -1,7 +1,10 @@
+// Has all of the routing logic for creating, updating, or deleting a tool
+
 const router = require('express').Router();
 const { Tool, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// Route for creating a new tool
 router.post('/', async (req, res) => {
   try {
       const newTool = await Tool.create({
@@ -10,8 +13,6 @@ router.post('/', async (req, res) => {
           user_id: req.session.user_id,
           category_id: req.body.category
       });
-
-      console.log(newTool)
       
   res.status(200).json(newTool);
   } catch (err) {
@@ -19,30 +20,27 @@ router.post('/', async (req, res) => {
   }
 });
 
-//delete route working 
+// Route for deleting a tool
 router.delete('/:id', withAuth, async (req, res) => {
-// alert("delete button was clicked");
-    try {
-      const toolData = Tool.destroy({
-        where: {
-          id: req.params.id,
-          user_id: req.session.user_id,
-        },
-      });
-  
+  try {
+    const toolData = Tool.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
 
-        if(toolData) {        
-            res.status(200).end()
-        } else{
-            res.status(404).end()
-        }}
-        // catch will excute AFTER the try logic
-        catch (err){
-            res.status(500).json(err)
-        }
+  if(toolData) {        
+      res.status(200).end()
+  } else{
+      res.status(404).end()
+  }}
+  catch (err){
+      res.status(500).json(err)
+  }
 });
 
-// update route  
+// Route for updating a tool 
 router.put('/:id', withAuth, async (req, res) => {
   try {
     const toolData = await Tool.update(req.body, {

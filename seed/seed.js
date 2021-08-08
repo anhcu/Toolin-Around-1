@@ -1,3 +1,5 @@
+// Logic to create seed and assign random tools and neighborhoods to user
+
 const sequelize = require('../config/connection');
 
 const { User, Tool, Category, Neighborhood } = require('../models');

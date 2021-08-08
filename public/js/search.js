@@ -1,6 +1,9 @@
+// Logic to perform a search
+
 const searchHandler = async (event) => {
     event.preventDefault();
   
+    // Gets value from form
     const search = document.querySelector('#search').value.trim();
 
     // GRAB THE HOMEPAGE FILEPATH ONLY, REMOVING ANY ADDITIONAL ROUTES (I.E. /USERS ETC) FROM URL
@@ -21,7 +24,6 @@ const searchHandler = async (event) => {
     }
   };
 
-  
 document
-    .querySelector('#search-form')
-    .addEventListener('click', searchHandler)
+  .querySelector('#search-form')
+  .addEventListener('click', searchHandler)

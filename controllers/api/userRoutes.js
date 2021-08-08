@@ -1,9 +1,9 @@
-// Has all of the logic to login or sign up
+// Has all of the routing logic to login or sign up
 
 const router = require('express').Router();
 const { User, Neighborhood } = require('../../models');
 
-// CREATE A NEW USER
+// Creates a new user
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// LOGIN A USER
+// Logs in a user
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({
@@ -81,6 +81,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Logs out a user
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
