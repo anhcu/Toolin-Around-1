@@ -8,18 +8,12 @@
 {{/if}}
 {{#each tools}}
 <section>
-  <div class="row">
     <a href="/tools/{{id}}">
-      <header class="col s12">
-        <div class="row">
-          <h3 class="col s12 l7">{{name}} </h3>
+        <div class="row tool-and-owner indigo-text text-darken-2">
+          <h3 class="col s12 l7 tool-name">{{name}}</h3>
           <p class="col s12 l5 tool-owner">posted by {{user.name}} in {{user.neighborhood.name}}</p>
+          <p class="col s12">{{description}}</p>
         </div>
-      </header>
-      <div class="col s12"> 
-        <p>{{description}}</p>
-      </div>
     </a>
-  </div>
 </section> 
 {{/each}}

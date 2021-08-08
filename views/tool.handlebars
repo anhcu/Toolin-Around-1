@@ -1,24 +1,23 @@
 <section>
   <div class="row">
-      <header class="col s12">
-        <div class="row">
-          <h3 class="col s12 l7">{{tool.name}} </h3>
-          <p class="col s12 l5 tool-owner">posted by <a href="/user/{{tool.user.id}}">{{tool.user.name}}</a></p>
-          <p class="col s12 l5">{{tool.category.name}}</a></p>
-        </div>
-      </header>
+      <h3 class="col s12 l7">{{tool.name}}</h3>
+            <p class="col s12">{{tool.description}}</p>
+      <p class="col s12">posted by <a href="/user/{{tool.user.id}}">{{tool.user.name}}</a></p>
+      <p class="col s12">{{tool.category.name}}</p>
+
       <div class="col s12"> 
-        <p>{{tool.description}}</p>
         <input type='hidden' name="tool-id" value="{{tool.id}}">
         {{#if user_tool}}
         <div class="right" id="delete-edit-div">
           <form class="delete-tool" id="delete-tool-form">
-            <button class="btn btn-primary" type="submit"><i class="material-icons" data-id="{{id}}">delete</i></button>
+            <button class="btn btn-primary indigo darken-4" type="submit"><i class="material-icons" data-id="{{id}}">delete</i></button>
           </form>
-          <a href="/update-tool/{{tool.id}}" class="white-text btn btn-primary"><i class="material-icons">edit</i></a>
+          <a href="/update-tool/{{tool.id}}" class="white-text btn btn-primary indigo darken-4"><i class="material-icons">edit</i></a>
         </div>
         {{else}}
-          <button id="borrow" class="btn btn-primary">borrow tool</button>
+        <div class="right">
+          <button id="borrow" class="btn btn-primary indigo darken-4">borrow tool</button>
+          </div>
         {{/if}}
       </div>
   </div>
