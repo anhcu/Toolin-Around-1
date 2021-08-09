@@ -159,6 +159,12 @@ _Tools by neighborhood:_
 _Tools by search:_
 ![list of all tools returned for search of cut](https://github.com/merewall/Toolin-Around/blob/main/public/images/search.PNG)
 
+_Welcome email:_
+![automated welcome email](/public/images/welcome-email.PNG)
+
+_Tool requested email:_
+![automated welcome email](/public/images/tool-request.PNG)
+
 ## Technologies
 * JavaScript
 * Node.js
