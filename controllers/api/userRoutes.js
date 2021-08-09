@@ -1,12 +1,16 @@
 // Has all of the routing logic to login or sign up
 
+// BRING IN EXPRESS ROUTER AND USER & NEIGHBORHOOD MODELS
 const router = require('express').Router();
 const { User, Neighborhood } = require('../../models');
 
-// Creates a new user
+// CREATES A NEW USER
 router.post('/', async (req, res) => {
   try {
+    // CREATE A NEW USER IN THE DB WITH THE FORM DATA
     const userData = await User.create(req.body);
+
+    // GET THE NEW USER'S NEIGHBORHOOD NAME FOR NAV BAR RENDERING
     const neighborhoodData = await User.findOne({
       where: {
         email: userData.email
@@ -19,6 +23,7 @@ router.post('/', async (req, res) => {
       ],
     });
 
+    // VARIABLES TO SAVE TO SESSION FOR HANDLEBARS INPUTS AND CONDITIONALS
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
@@ -34,13 +39,15 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Logs in a user
+// LOGS IN A USER
 router.post('/login', async (req, res) => {
   try {
+    // FIND A USER IN THE DB WITH THE MATCHING EMAIL
     const userData = await User.findOne({
       where: {
         email: req.body.email
       },
+      // INCLUDE THEIR NEIGHBORHOOD NAME FOR NAV BAR RENDERING
       include: [
         {
           model: Neighborhood,
@@ -49,6 +56,7 @@ router.post('/login', async (req, res) => {
       ],
     });
 
+    // IF NO USER EXISTS IN DB, THROW 400 ERROR
     if (!userData) {
       res
         .status(400)
@@ -56,8 +64,10 @@ router.post('/login', async (req, res) => {
       return;
     }
 
+    // USE INSTANCE METHOD TO CHECK THE SUBMITTED PASSWORD AGAINST THE DB
     const validPassword = await userData.checkPassword(req.body.password);
 
+    // IF PASSWORD DOESN'T MATCH, THROW 400 ERROR
     if (!validPassword) {
       res
         .status(400)
@@ -65,6 +75,7 @@ router.post('/login', async (req, res) => {
       return;
     }
 
+    // VARIABLES TO SAVE TO SESSION FOR HANDLEBARS INPUTS AND CONDITIONALS
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
@@ -81,7 +92,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Logs out a user
+// LOGS OUT A USER
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
@@ -92,4 +103,5 @@ router.post('/logout', (req, res) => {
   }
 });
 
+// EXPORT ROUTER
 module.exports = router;

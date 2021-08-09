@@ -1,12 +1,13 @@
+// BRING IN EXPRESS ROUTER, NODEMAILER AND USER & TOOL MODELS
 const router = require('express').Router();
 const nodemailer = require('nodemailer');
 const { User, Tool } = require('../../models');
 
-// Route to send out email after "Request to Borow is clicked"
+// Route to send out email after "Request to Borrow is clicked"
 // This is the functionality for nodemailer
 router.post('/:id', async (req, res) => {
 
-    // Find tool by pk and inslude user names and emails
+    // Find tool by pk and include the tool's user name and email
     const dbToolData = await Tool.findByPk(req.params.id, {
         include: [
             {
@@ -22,24 +23,28 @@ router.post('/:id', async (req, res) => {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.EMAIL,// || //'abc@gmail.com', // TODO: your gmail account
-            pass: process.env.PASSWORD //|| '1234' // TODO: your gmail password
+            // Points to secure Toolin' Around email address and password
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD 
         }
     });
 
     // Step 2
     let mailOptions = {
-        from: 'toolin.around21@gmail.com', // TODO: email sender, req.session.user_email
-        to: 'toolin.around21@gmail.com', // TODO: email receiver, tool.user.email
-        subject: 'Tool Requested',
+        from: 'toolin.around21@gmail.com', 
+        to: `${tool.user.email}`, 
+        subject: `Tool Requested: ${tool.name}`,
         text: 'A neighbor has requested one of your tools.',
         html: `
-            <p>Hey, ${tool.user.name}! The user below has requested to borrow one of your tools. Please contact them directly to arrange for pick up.</p>
+            <p>Hey, ${tool.user.name}!</p>
+            <p>The user below has requested to borrow one of your tools. Please contact them directly to arrange for pick up.</p>
             <ul>
-                <li>Name: ${req.session.user_name}</li>
-                <li>Email: ${req.session.user_email}</li>
-                <li>Tool Requested:${tool.name}</li>
+                <li>Name: <a href="https://toolin-around.herokuapp.com/user/${req.session.user_id}">${req.session.user_name}</a></li>
+                <li>Email: <a href="mailto:${req.session.user_email}">${req.session.user_email}</a></li>
+                <li>Tool Requested: <a href="https://toolin-around.herokuapp.com/tools/${tool.id}">${tool.name}</a></li>
             </ul>
+            <p>~The Toolin' Around Team</p>
+            <p><a href="mailto:toolin.around21@gmail.com">Email us</a> with any questions!<p>
         `
     };
 
@@ -55,5 +60,6 @@ router.post('/:id', async (req, res) => {
     });
 })
 
+// EXPORT ROUTER
 module.exports = router;
 

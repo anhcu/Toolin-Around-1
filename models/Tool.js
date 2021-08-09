@@ -21,6 +21,7 @@ Tool.init(
         description: {
             type: DataTypes.STRING,
         },
+        // FOREIGN KEY FROM USER MODEL
         user_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -28,6 +29,7 @@ Tool.init(
                 key: 'id',
             },
         },
+        // FOREIGN KEY FROM CATEGORY MODEL
         category_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -45,4 +47,5 @@ Tool.init(
     }
 );
 
+// EXPORT THE TOOL MODEL FOR USE IN ROUTES
 module.exports = Tool;

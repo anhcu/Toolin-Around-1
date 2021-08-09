@@ -16,6 +16,10 @@ nav {
   background-color: #ffca28;
 }
 
+nav .nav-title {
+  font-size: 3.2rem;
+}
+
 main {
   flex: 1 0 auto;
 }
@@ -25,10 +29,17 @@ main {
 }
 
 .padded {
-  padding-left: 2em;
+  padding-left: 2.2em;
+  padding-right: 2.2em;
 }
-.card-image {
-  padding-left: 2em;
+
+.padded-form {
+  padding-left: 0.5em;
+}
+
+.home-p {
+  font-size: 1.4rem;
+  text-align: center;
 }
 
 .title {
@@ -39,6 +50,14 @@ main {
 p {
   font-size: 1.5rem;
   color: #1a237e;
+}
+
+.page-title {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid black;
 }
 
 li:last-child {
@@ -59,6 +78,19 @@ li a {
   display: none;
 }
 
+#search {
+  margin-top: 2px;
+  border-bottom: 1px solid white;
+}
+
+.update-tool label,
+.new-tool label,
+.login-form label,
+.signup-form label {
+  font-size: 0.9em;
+  color: #7a7a7a;
+}
+
 #input-group {
   display: inline;
 }
@@ -70,6 +102,11 @@ li a {
 .container {
   background-color: #ffecb3;
   border-radius: 5px;
+  margin-top: 20px;
+}
+
+.rounded {
+  border-radius: 5px;
 }
 
 #delete-tool-form {
@@ -77,12 +114,34 @@ li a {
 }
 
 .tool-name {
-  font-size: 2rem; 
+  font-size: 2rem;
 }
+
+#tool-owner-div p {
+  margin-top: 0px;
+}
+
+#borrow,
+#add-tool,
+#delete-edit-div {
+  margin-bottom: 16px;
+}
+
+footer div {
+  color: white;
+  font-size: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 /* big landscape tablets, laptops, and desktops */
 @media screen and (min-width: 992px) {
   .tool-owner {
     margin-top: 48px;
     text-align: right;
+  }
+
+  #search {
+    margin-left: -20px;
   }
 }

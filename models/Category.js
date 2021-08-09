@@ -32,4 +32,5 @@ Category.init(
     }
 );
 
+// EXPORT THE CATEGORY MODEL FOR USE IN ROUTES
 module.exports = Category;

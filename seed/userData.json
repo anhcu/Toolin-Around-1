@@ -18,5 +18,20 @@
     "name": "Scarlett Johansson",
     "email": "BlackWidow@aol.com",
     "password": "password12345"
+  },
+  {
+    "name": "Tom Hiddleston",
+    "email": "Loki@aol.com",
+    "password": "password12345"
+  },
+  {
+    "name": "Chris Evans",
+    "email": "CaptainAmerica@aol.com",
+    "password": "password12345"
+  },
+  {
+    "name": "Tom Holland",
+    "email": "Spiderman@aol.com",
+    "password": "password12345"
   }
 ]

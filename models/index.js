@@ -1,5 +1,6 @@
 // Sets up model associations
 
+// BRING IN USER, CATEGORY, NEIGHBORHOOD AND TOOL MODELS
 const User = require('./User');
 const Category = require('./Category');
 const Neighborhood = require('./Neighborhood');
@@ -29,5 +30,5 @@ Tool.belongsTo(Category, {
     foreignKey: 'category_id',
 });
 
-
+// EXPORT USER, POST, AND COMMENT MODELS FOR USE IN ROUTES
 module.exports = { User, Category, Neighborhood, Tool };
