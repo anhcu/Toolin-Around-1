@@ -133,7 +133,7 @@ _Login or Create Account page:_
 ![login or signup page](https://github.com/merewall/Toolin-Around/blob/main/public/images/login.PNG)
 
 _Tools by category:_
-![list of automotive tools in the neighborhood](https://github.com/merewall/Toolin-Around/blob/main/public/images/tool-by-category.PNG)
+![list of automotive tools in the neighborhood](https://github.com/merewall/Toolin-Around/blob/main/public/images/tools-by-category.PNG)
 
 _Single tool:_
 ![diagnostic scanner tool with description, category icon, owner of Tom Hiddleston, and a request to borrow button](https://github.com/merewall/Toolin-Around/blob/main/public/images/tool-by-id.PNG)
