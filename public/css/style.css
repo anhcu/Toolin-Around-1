@@ -134,6 +134,19 @@ footer div {
   padding-bottom: 0.25rem;
 }
 
+/* very small smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  #search {
+    margin-left: 2rem;
+  }
+
+  nav ul,
+  #search-form {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
+
 /* big landscape tablets, laptops, and desktops */
 @media screen and (min-width: 992px) {
   .tool-owner {
