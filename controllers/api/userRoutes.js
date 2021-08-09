@@ -2,6 +2,7 @@
 
 // BRING IN EXPRESS ROUTER AND USER & NEIGHBORHOOD MODELS
 const router = require('express').Router();
+const nodemailer = require('nodemailer');
 const { User, Neighborhood } = require('../../models');
 
 // CREATES A NEW USER
@@ -23,6 +24,41 @@ router.post('/', async (req, res) => {
       ],
     });
 
+    // Step 1 - set up nodemailer for welcome email
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          // Points to secure Toolin' Around email address and password
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD 
+      }
+    });
+
+    // Step 2 - Welcome Email to user
+    let mailOptions = {
+      from: 'toolin.around21@gmail.com', 
+      to: `${userData.email}`, 
+      subject: `Welcome to Toolin' Around!`,
+      text: `Thanks for joining the Toolin' Around community.`,
+      html: `
+          <p>Welcome, ${userData.name}!</p>
+          <p>Thanks for joining the <a href="https://toolin-around.herokuapp.com">Toolin' Around</a> community!</p>
+          <p>We're making it easier to lend and borrow tools from your neighbors. No more pricy rentals. No more buying a tool for a one-time use.</p>
+          <p>Let's repair and build together!</p>
+          <p>Get started by checking out the tools in <a href="https://toolin-around.herokuapp.com/neighborhood/${neighborhoodData.neighborhood.name}">${neighborhoodData.neighborhood.name}</a>.</p>
+          <p>~The Toolin' Around Team</p>
+          <p><a href="mailto:toolin.around21@gmail.com">Email us</a> with any questions!<p>
+      `
+    };
+
+    // Step 3 - Send email
+    transporter.sendMail(mailOptions, (err, data) => {
+      if (err) {
+          return console.log('Error occurs', err);
+      }
+      return console.log('Email sent!!!');
+    });
+  
     // VARIABLES TO SAVE TO SESSION FOR HANDLEBARS INPUTS AND CONDITIONALS
     req.session.save(() => {
       req.session.user_id = userData.id;
