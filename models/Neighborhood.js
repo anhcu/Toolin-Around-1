@@ -28,4 +28,5 @@ Neighborhood.init(
     }
 );
 
+// EXPORT NEIGHBORHOOD MODEL FOR USE IN ROUTES
 module.exports = Neighborhood;

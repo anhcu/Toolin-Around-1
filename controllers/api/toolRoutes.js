@@ -1,18 +1,20 @@
 // Has all of the routing logic for creating, updating, or deleting a tool
 
+// BRING IN EXPRESS ROUTER AND TOOL MODEL
 const router = require('express').Router();
-const { Tool, User } = require('../../models');
+const { Tool } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// Route for creating a new tool
+// ROUTE FOR CREATING A NEW TOOL
 router.post('/', async (req, res) => {
   try {
-      const newTool = await Tool.create({
-          name: req.body.name,
-          description: req.body.description,
-          user_id: req.session.user_id,
-          category_id: req.body.category
-      });
+    // CREATE AN INSTANCE OF TOOL WITH THE FORM DATA
+    const newTool = await Tool.create({
+        name: req.body.name,
+        description: req.body.description,
+        user_id: req.session.user_id,
+        category_id: req.body.category_id
+    });
       
   res.status(200).json(newTool);
   } catch (err) {
@@ -20,9 +22,10 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Route for deleting a tool
+// ROUTE FOR DELETING A TOOL
 router.delete('/:id', withAuth, async (req, res) => {
   try {
+    // DESTROY THE TOOL WITH THAT ID
     const toolData = Tool.destroy({
       where: {
         id: req.params.id,
@@ -40,14 +43,16 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
-// Route for updating a tool 
+// ROUTE FOR UPDATING A TOOL
 router.put('/:id', withAuth, async (req, res) => {
   try {
+    // UPDATE A TOOL BY THAT ID WITH THE FORM DATA
     const toolData = await Tool.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
+    
     if (toolData){
       res.status(200).end();
     } else {
@@ -58,4 +63,5 @@ router.put('/:id', withAuth, async (req, res) => {
   }
 });
 
+// EXPORT ROUTER
 module.exports = router;

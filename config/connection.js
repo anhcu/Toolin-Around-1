@@ -1,6 +1,8 @@
+// BRING IN SEQUELIZE MODULE AND DOT ENV
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
+// CONFIGURE CONNECTION AND SEQUELIZE WITH DOTENV VARIABLES
 let sequelize;
 
 // If using JAWSDB, set up with their configuration, if not, use the .env file
@@ -19,4 +21,5 @@ if (process.env.JAWSDB_URL) {
   );
 }
 
+// EXPORT SEQUELIZE CONNECTION
 module.exports = sequelize;

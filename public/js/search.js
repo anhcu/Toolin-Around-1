@@ -9,6 +9,7 @@ const searchHandler = async (event) => {
     // GRAB THE HOMEPAGE FILEPATH ONLY, REMOVING ANY ADDITIONAL ROUTES (I.E. /USERS ETC) FROM URL
     const home_url = document.location.href.split("/").slice(0,3).join('/')
 
+    // GET REQUEST AT API ENDPOINT FOR SEARCH TERM
     if (search) {
       const response = await fetch(`${home_url}/${search}`, {
         method: 'GET',
@@ -16,14 +17,15 @@ const searchHandler = async (event) => {
       });
   
       if (response.ok) {
+        // IF SUCCESSFUL, REDIRECT TO SEARCHED RESULTS PAGE
         document.location.replace(`${home_url}/${search}`);
-        console.log("all good!")
       } else {
         alert(response.statusText);
       }
     }
   };
 
+// CLICK EVENT LISTENER FOR SEARCH BAR
 document
   .querySelector('#search-form')
   .addEventListener('click', searchHandler)

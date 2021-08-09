@@ -9,7 +9,7 @@ const newToolHandler = async (event) => {
     const category_id = document.querySelector('#category').value.trim();
 
     if (name && description && category_id ) {
-
+        // POST REQUEST AT THE API ENDPOINT TO CREATE A NEW TOOL WITH FORM DATA
         const res = await fetch('/api/tools', {
             method: 'POST',
             body: JSON.stringify({ name, description, category_id }),
@@ -17,7 +17,6 @@ const newToolHandler = async (event) => {
         });
 
         if (res.ok) {
-            console.log(res);
             document.location.replace('/toolbox');
         } else {
             console.log('Error 2')
@@ -26,9 +25,11 @@ const newToolHandler = async (event) => {
     }
 };
 
+// EVENT LISTENER FOR SUBMITTING A NEW TOOL BUTTON
 document
     .querySelector('.new-tool').addEventListener('submit', newToolHandler);
 
+// MATERIALIZE JQUERY FOR CATEGORY SELECTION DROPDOWN
 $(document).ready(function(){
     $('select').formSelect();
 });

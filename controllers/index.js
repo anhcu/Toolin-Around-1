@@ -1,14 +1,15 @@
+// BRING IN EXPRESS ROUTER
 const router = require('express').Router();
 
+// ACCESS TO API ROUTES AND HOME ROUTES
 const apiRoutes = require('./api');
 const homeRoutes = require('./homeRoutes');
 
-// Takes you to homeRoutes file
+// ENABLE USE OF API AND HOME ROUTES
 router.use('/', homeRoutes);
-
-// Taks you to api folder, has index and userRoutes inside
 router.use('/api', apiRoutes);
 
+// EXPORT THE ROUTER FOR USE IN APPLICATION
 module.exports = router;
 
 

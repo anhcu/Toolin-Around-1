@@ -8,4 +8,5 @@ const withAuth = (req, res, next) => {
   }
 };
 
+// EXPORT MIDDLEWARE FOR USE IN APPLICATION
 module.exports = withAuth;

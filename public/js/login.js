@@ -24,6 +24,7 @@ const loginFormHandler = async (event) => {
   }
 };
 
+// FUNCTION FOR SIGNING UP A NEW USER
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
@@ -48,14 +49,17 @@ const signupFormHandler = async (event) => {
   }
 };
 
+// SUBMIT EVENT LISTENER FOR LOGIN FORM BUTTON
 document
   .querySelector('.login-form')
   .addEventListener('submit', loginFormHandler);
 
+// SUBMIT EVENT LISTENER FOR SIGNUP FORM BUTTON
 document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormHandler);
 
+// MATERIALIZE JQUERY FOR NEIGHBORHOOD DROPDOWN SELECTION
 $(document).ready(function(){
   $('select').formSelect();
 });
