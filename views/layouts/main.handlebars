@@ -23,17 +23,17 @@
     <div class="nav-wrapper">
       <ul class="right col sm12 m8 l6">
         <!-- HOME  BUTTON -->
-        <li><a href="/"><i class="material-icons left" id="home">home</i>Home</a></li>
+        <li><a href="/"><i class="material-icons left" id="home">home</i><span class="hide-on-small-only">Home</span></a></li>
         {{#if logged_in}}
         <!-- USER DASHBOARD BUTTON -->
-        <li><a href="/toolbox"><i class="material-icons left" id="dashboard">build</i>My toolbox</a></li>
+        <li><a href="/toolbox"><i class="material-icons left" id="dashboard">build</i><span class="hide-on-small-only">My toolbox</span></a></li>
         <!-- USER'S NEIGHBORHOOD -->
-        <li><a href="/neighborhood/{{neighborhood_name}}"><i class="material-icons left" id="dashboard">location_on</i>{{neighborhood_name}}</a></li>
+        <li><a href="/neighborhood/{{neighborhood_name}}"><i class="material-icons left" id="dashboard">location_on</i><span class="hide-on-small-only">{{neighborhood_name}}</span></a></li>
         <!-- LOGOUT BUTTON -->
-        <li><a id="logout" href="#"><i class="material-icons left" id="logout">lock_outline</i>Logout</a></li>
+        <li><a id="logout" href="#"><i class="material-icons left" id="logout">lock_outline</i><span class="hide-on-small-only">Logout</span></a></li>
         {{else}}
         <!-- LOGIN BUTTON -->
-        <li><a href="/login"><i class="material-icons left" id="login">vpn_key</i>Login</a></li>
+        <li><a href="/login"><i class="material-icons left" id="login">vpn_key</i><span class="hide-on-small-only">Login</span></a></li>
         {{/if}}
       </ul>
       <!-- SEARCH BAR -->
