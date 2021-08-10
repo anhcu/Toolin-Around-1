@@ -163,7 +163,7 @@ _Welcome email:_
 ![automated welcome email](/public/images/welcome-email.PNG)
 
 _Tool requested email:_
-![automated welcome email](/public/images/tool-request.PNG)
+![automated request email](/public/images/tool-request.PNG)
 
 ## Technologies
 * JavaScript

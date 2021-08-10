@@ -1,9 +1,9 @@
 <!-- RENDERING SINGLE TOOL PAGE W/ CATEGORY ICON, TOOL NAME, TOOL DESCRIPTION, CLICKABLE OWNER NAME -->
 <section>
   <div class="row">
-      <h3 class="col s12 l7"><span style="font-size: 1em">
+      <h4 class="col s12 l7"><span style="font-size: 1em">
           <i class="{{tool.category.class}}"></i>
-        </span>{{tool.name}}</h3>
+        </span>{{tool.name}}</h4>
       <p class="col s12">{{tool.description}}</p>
       <!-- SHOW CLICKABLE TOOL OWNER IF NOT THE USER'S TOOL -->
       {{#unless user_tool}}

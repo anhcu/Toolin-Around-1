@@ -9,11 +9,15 @@ body {
 }
 
 ::placeholder {
-  color: white;
+  color: #283593;
 }
 
 nav {
   background-color: #ffca28;
+}
+
+nav ul a {
+  color: #283593;
 }
 
 nav .nav-title {
