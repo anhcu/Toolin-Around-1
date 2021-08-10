@@ -28,4 +28,4 @@ const searchHandler = async (event) => {
 // CLICK EVENT LISTENER FOR SEARCH BAR
 document
   .querySelector('#search-form')
-  .addEventListener('click', searchHandler)
+  .addEventListener('submit', searchHandler)
