@@ -21,7 +21,7 @@ nav ul a {
 }
 
 nav .nav-title {
-  font-size: 3.2rem;
+  font-size: 3.5rem;
 }
 
 main {
@@ -62,6 +62,13 @@ p {
   padding-top: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid black;
+  font-size: 2.5rem;
+}
+
+.welcome,
+.form-title {
+  font-size: 2.5rem;
+  padding-top: 1rem;
 }
 
 li:last-child {
@@ -84,7 +91,7 @@ li a {
 
 #search {
   margin-top: 2px;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #283593;
 }
 
 .update-tool label,
@@ -118,7 +125,12 @@ li a {
 }
 
 .tool-name {
-  font-size: 2rem;
+  font-size: 1.75rem;
+}
+
+.tool-owner,
+.p-size {
+  font-size: 1.25rem;
 }
 
 #tool-owner-div p {

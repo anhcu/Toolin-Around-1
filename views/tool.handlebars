@@ -1,14 +1,14 @@
 <!-- RENDERING SINGLE TOOL PAGE W/ CATEGORY ICON, TOOL NAME, TOOL DESCRIPTION, CLICKABLE OWNER NAME -->
 <section>
   <div class="row">
-      <h4 class="col s12 l7"><span style="font-size: 1em">
+      <h4 class="col s12 l7 tool-name"><span style="font-size: 1em">
           <i class="{{tool.category.class}}"></i>
         </span>{{tool.name}}</h4>
-      <p class="col s12">{{tool.description}}</p>
+      <p class="col s12 p-size">{{tool.description}}</p>
       <!-- SHOW CLICKABLE TOOL OWNER IF NOT THE USER'S TOOL -->
       {{#unless user_tool}}
       <div class="center" id="tool-owner-div">
-        <p class="col s12">Owner: <a href="/user/{{tool.user.id}}">{{tool.user.name}}</a></p>
+        <p class="col s12 p-size">Owner: <a href="/user/{{tool.user.id}}">{{tool.user.name}}</a></p>
       </div>
       {{/unless}}
 
