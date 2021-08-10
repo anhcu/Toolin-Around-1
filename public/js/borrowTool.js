@@ -25,6 +25,7 @@ const mailTest = async (event) => {
     const borrowBtnDiv = document.querySelector('#borrow-btn-div');
     let emailSentMsg = document.createElement("p");
     emailSentMsg.setAttribute("id", "email-sent");
+    emailSentMsg.setAttribute("class", "p-size");
     emailSentMsg.textContent = `Email sent! Please keep an eye on your email to coordinate with your neighbor.`;
     borrowBtnDiv.prepend(emailSentMsg);
 
